@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SITE INTERNET - Landing Page</title>
+  <link href="src/css/output.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body class="relative">
+
+  <!-- Background full width FIXED -->
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <img
+      src="src/assets/images/background_accueil.png"
+      alt="Fond"
+      class="w-full h-full object-cover blur-xs opacity-90"
+    />
+    <!-- dark shade -->
+    <div class="absolute inset-0 bg-white/60"></div>
+  </div>
+  <!-- Toast -->
+  <div id="toast" 
+       class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-blue-900 text-white px-6 py-3 rounded-lg shadow-lg z-[9999] hidden opacity-0 transition-opacity duration-300">
+    ✅ Votre demande a bien été envoyée !
+  </div>
+
+  <main class="container mx-auto min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-blue-900 backdrop-blur-md shadow-md z-50">
+      <div class="flex items-center justify-between p-4">
+        <span class="font-bold text-white">PC Express SA</span>
+
+        <!-- Button burger (mobile) -->
+        <button id="burgerBtn" class="lg:hidden flex flex-col gap-1 relative z-50">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+
+        <!-- Menu normal (desktop) -->
+        <nav class="hidden lg:block">
+          <ul class="flex gap-6 text-blue-900">
+            <li><a href="index.html" class="text-orange-600">Accueil</a></li>
+            <li><a href="services.html" class="hover:text-orange-600 text-white">Services</a></li>
+            <li><a href="formations.html" class="hover:text-orange-600 text-white">Formations</a></li>
+            <li><a href="conseilsPratiques.html" class="hover:text-orange-600 text-white">Conseils pratiques</a></li>
+            <li><a href="quiSommesNous.html" class="hover:text-orange-600 text-white">Qui sommes-nous</a></li>
+            <li><a href="tarifs.html" class="hover:text-orange-600 text-white">Tarifs</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header> 
+
+    <!-- Overlay dark -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+    <!-- Menu mobile slide-in -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-64 h-full bg-white/70 backdrop-blur-md shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+      <ul class="flex flex-col gap-6 p-6 text-blue-900">
+        <li><a href="index.html" class="hover:text-orange-600">Accueil</a></li>
+        <li><a href="services.html" class="text-orange-600">Services</a></li>
+        <li><a href="formations.html" class="hover:text-orange-600">Formations</a></li>
+        <li><a href="conseilsPratiques.html" class="hover:text-orange-600">Conseils pratiques</a></li>
+        <li><a href="quiSommesNous.html" class="hover:text-orange-600">Qui sommes-nous</a></li>
+        <li><a href="tarifs.html" class="hover:text-orange-600">Tarifs</a></li>
+      </ul>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative flex flex-col items-center justify-center text-center mt-[15vh] px-4 sm:px-6">
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 mb-6">
+        Bienvenue chez <span class="text-orange-600">PC Express SA</span>
+      </h1>
+      <p class="max-w-2xl text-lg text-gray-700 leading-relaxed">
+        Dépannage informatique, formations, conseils pratiques et assistance personnalisée.  
+        PC Express vous accompagne à domicile ou à distance pour simplifier vos usages numériques et sécuriser vos données.
+      </p>
+
+      <div class="flex gap-4 mt-8">
+        <a href="services.html" class="bg-orange-600 hover:bg-blue-900 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:-translate-y-1 duration-300">
+          Découvrir nos services
+        </a>
+        <button id="openModal"
+          class="bg-blue-900 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:-translate-y-1 duration-300">
+          Prendre un RDV
+        </button>
+      </div>
+    </section>
+
+    <!-- MODAL RDV -->
+    <div id="modal" 
+         class="fixed inset-0 bg-black/80 flex items-center justify-center 
+                opacity-0 pointer-events-none transition-opacity duration-300">
+      <div id="modalContent" 
+           class="bg-white rounded-xl shadow-lg w-11/12 sm:w-96 p-6 relative 
+                  transform scale-95 transition-transform duration-300">
+        
+        <!-- Bouton fermer -->
+        <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black">✕</button>
+
+        <h2 class="text-xl font-bold mb-4 text-blue-900">Prendre un rendez-vous</h2>
+        <form id="contactForm" class="flex flex-col gap-4">
+          <input type="text" id="name" placeholder="Nom" class="border rounded-lg p-2 w-full">
+          <input type="email" id="email" placeholder="Email" class="border rounded-lg p-2 w-full">
+          <input type="tel" id="phone" placeholder="Téléphone" class="border rounded-lg p-2 w-full">
+          <input type="date" id="date" class="border rounded-lg p-2 w-full">
+          <textarea id="message" placeholder="Votre message..." class="border rounded-lg p-2 w-full"></textarea>
+          <button type="submit" class="bg-blue-900 text-white rounded-lg p-2 hover:bg-black">Envoyer</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- why choose us -->
+    <section class="max-w-5xl mx-auto mt-20 px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 bg-white/70 rounded-xl shadow-md hover:shadow-lg transition">
+        <svg class="w-12 h-12 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3 class="font-bold text-lg text-blue-900 mb-2">Réactivité</h3>
+        <p class="text-gray-600">Interventions rapides à domicile ou à distance pour résoudre vos soucis sans attente.</p>
+      </div>
+      <div class="p-6 bg-white/70 rounded-xl shadow-md hover:shadow-lg transition">
+        <svg class="w-12 h-12 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" stroke-width="2"
+       viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="7"/>
+    <line x1="16.65" y1="16.65" x2="21" y2="21"/>
+  </svg>
+        <h3 class="font-bold text-lg text-blue-900 mb-2">Expertise</h3>
+        <p class="text-gray-600">Plus de 7 ans d’expérience dans le support informatique et les solutions numériques.</p>
+      </div>
+      <div class="p-6 bg-white/70 rounded-xl shadow-md hover:shadow-lg transition">
+        <svg class="w-12 h-12 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M4 21v-2a4 4 0 0 1 3-3.87"/><circle cx="12" cy="7" r="4"/></svg>
+        <h3 class="font-bold text-lg text-blue-900 mb-2">Accompagnement</h3>
+        <p class="text-gray-600">Un suivi personnalisé pour vous guider dans vos projets numériques et formations.</p>
+      </div>
+    </section>
+
+    <!-- Fonctionnalities below -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-5 m-auto mt-24">
+      <!-- Services -->
+      <a href="services.html" class="flex items-start gap-3  text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Services</h3>
+          <p class="w-50 text-sm">Un accompagnement complet pour particuliers : installation, dépannage, diagnostic et assistance informatique</p>
+        </div>
+      </a>
+      <!-- Formations -->
+      <a href="formations.html" class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="6" height="6" rx="1"/>
+          <rect x="14" y="4" width="6" height="6" rx="1"/>
+          <rect x="4" y="14" width="6" height="6" rx="1"/>
+          <rect x="14" y="14" width="6" height="6" rx="1"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Formations</h3>
+          <p class="w-50 text-sm">Bibliothèque d'applications, connexion à des logiciels tiers, intégrations aux calendriers et appels</p>
+        </div>
+      </a>
+      <!-- advises -->
+      <a href="conseilsPratiques.html" class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11l9-7 9 7"/>
+          <path d="M5 10v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9"/>
+          <path d="M12 12v6"/>
+          <path d="M12 12l-3 2"/>
+          <path d="M12 12l3 2"/>
+          <circle cx="12" cy="10" r="1"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Conseils pratiques</h3>
+          <p class="w-50 text-sm">Connectez-vous à Google Home, Apple Home ou Alexa via les protocoles</p>
+        </div>
+      </a>
+      <!-- about us -->
+      <a href="quiSommesNous.html" class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15.5 6.5a3.5 3.5 0 1 0-4.95 4.95l-6.05 6.05a2 2 0 0 0 2.83 2.83l6.05-6.05a3.5 3.5 0 0 0 2.12-7.78z"/>
+          <path d="M21 3l-2 2-3 1 2 2 1-3 2-2z"/>
+          <path d="M13 11l4 4"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Qui sommes-nous ?</h3>
+          <p class="w-50 text-sm">Création de site internet, identité graphique, support réseau et périphériques</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Call to action final -->
+    <section class="text-center mt-16 bg-blue-900 text-white py-12 rounded-lg shadow-lg mx-6">
+      <h2 class="text-2xl font-bold mb-4">Besoin d’une aide immédiate ?</h2>
+      <p class="mb-6">Contactez-nous dès maintenant pour un diagnostic gratuit et sans engagement.</p>
+      <a href="tarifs.html" class="bg-orange-600 hover:bg-white hover:text-blue-900 px-6 py-3 rounded-lg font-semibold shadow-md transition">
+        Demandez un devis gratuit
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <section class="flex justify-center m-auto mb-5 mt-5">
+      <p class="text-sm">Mentions légales – PC Express SA © 2026</p>
+    </section>
+
+  </main>
+
+  <!-- scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script> emailjs.init("T2PevuEgYoNEgD05x"); </script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+  <script src="src/js/script.js"></script>
+</body>
+</html>
+

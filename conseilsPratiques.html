@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conseils pratiques – PC Express</title>
+  <link href="src/css/output.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<!-- Toast -->
+<div id="toast"
+     class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-blue-900 text-white px-6 py-3 rounded-lg shadow-lg z-60 hidden opacity-0 transition-opacity duration-300">
+  ✅ Votre demande a bien été envoyée !
+</div>
+
+<body class="relative">
+  <!-- Background pleine largeur FIXE -->
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <img
+      src="src/assets/images/background_conseils_pratiques.png"
+      alt="Fond"
+      class="w-full h-full object-cover blur-xs opacity-90"
+    />
+    <!-- voile de lisibilité -->
+    <div class="absolute inset-0 bg-white/60"></div>
+  </div>
+
+
+  <main class="container mx-auto min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-blue-900 backdrop-blur-md shadow-md z-50">
+      <div class="flex items-center justify-between p-4">
+        <span class="font-bold text-white">PC Express SA</span>
+
+        <!-- Bouton burger (mobile) -->
+        <button id="burgerBtn" class="lg:hidden flex flex-col gap-1 relative z-50">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+
+        <!-- Menu normal (desktop) -->
+        <nav class="hidden lg:block">
+          <ul class="flex gap-6 text-blue-900">
+            <li><a href="index.html" class="hover:text-orange-600 text-white">Accueil</a></li>
+            <li><a href="services.html" class="hover:text-orange-600 text-white">Services</a></li>
+            <li><a href="formations.html" class="hover:text-orange-600 text-white">Formations</a></li>
+            <li><a href="conseilsPratiques.html" class="text-orange-600">Conseils pratiques</a></li>
+            <li><a href="quiSommesNous.html" class="hover:text-orange-600 text-white">Qui sommes-nous</a></li>
+            <li><a href="tarifs.html" class="hover:text-orange-600 text-white">Tarifs</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Overlay sombre -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+    <!-- Menu mobile slide-in -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-64 h-full bg-white/70 backdrop-blur-md shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+      <ul class="flex flex-col gap-6 p-6 text-blue-900">
+        <li><a href="index.html" class="hover:text-orange-600">Accueil</a></li>
+        <li><a href="services.html" class="hover:text-orange-600">Services</a></li>
+        <li><a href="formations.html" class="hover:text-orange-600">Formations</a></li>
+        <li><a href="conseilsPratiques.html" class="text-orange-600">Conseils pratiques</a></li>
+        <li><a href="quiSommesNous.html" class="hover:text-orange-600">Qui sommes-nous</a></li>
+        <li><a href="tarifs.html" class="hover:text-orange-600">Tarifs</a></li>
+      </ul>
+    </div>
+
+    <!-- Contenu Conseils pratiques + FAQ -->
+    <section class="flex flex-col lg:flex-row justify-center items-start mx-auto mt-[20vh] max-w-[1100px] grow gap-12 px-4 sm:px-6">
+
+       <!-- Liste des conseils (menu gauche) Desktop -->
+  <aside class="hidden lg:block w-[220px] bg-white/80 backdrop-blur-md rounded-xl shadow-md p-4 text-gray-700 h-fit ml-[-270px] top-28">
+    <h2 class="text-lg font-bold text-blue-900 mb-4">📒 Liste des conseils</h2>
+    <ul class="space-y-2 text-sm">
+      <br>
+      <li><a href="#conseil-securite" class="flex items-center gap-2 hover:text-orange-600"><span>🔒</span> Sécurité numérique</a></li>
+      <br>
+      <li><a href="#conseil-entretien" class="flex items-center gap-2 hover:text-orange-600"><span>🧹</span> Entretien régulier</a></li>
+      <br>
+      <li><a href="#conseil-optimisation" class="flex items-center gap-2 hover:text-orange-600"><span>🚀</span> Optimisation</a></li>
+      <br>
+      <li><a href="#conseil-sauvegarde" class="flex items-center gap-2 hover:text-orange-600"><span>💾</span> Sauvegarde</a></li>
+    </ul>
+  </aside>
+
+      <!-- Partie gauche : Conseils pratiques -->
+      <div class="flex-1 max-w-[650px] relative z-10">
+        <h1 class="text-3xl font-extrabold text-blue-900 mb-6">Conseils pratiques pour vos appareils</h1>
+        <p class="text-lg text-gray-600 font-semibold">
+          Des astuces simples et efficaces pour prolonger la durée de vie de votre matériel, optimiser vos performances et assurer votre sécurité numérique.
+        </p>
+
+        <!-- ✅ Texte accrocheur -->
+        <p class="text-md text-gray-700 mt-4 italic">
+          Des conseils pratiques publiés régulièrement pour vous accompagner. <span class="font-semibold text-blue-900">
+        </p>
+
+        <!-- Liste avec icônes cliquables -->
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 text-gray-500">
+          <li class="flex items-start gap-2 p-3 rounded-lg hover:shadow-md hover:bg-white/30 cursor-pointer service-item hover:-translate-y-1" 
+          data-title="Sécurité numérique"
+          data-content="<p>Protégez vos données personnelles en adoptant de bonnes pratiques au quotidien :</p>
+      <ul class='list-disc list-inside'>
+        <li>Création et gestion de <b>mots de passe robustes</b> (gestionnaire sécurisé conseillé).</li>
+        <li>Reconnaissance des <b>tentatives de phishing</b> et des faux sites.</li>
+        <li>Mise à jour régulière de vos logiciels et antivirus.</li>
+        <li>Paramétrages de la confidentialité sur vos appareils et navigateurs.</li>
+      </ul>
+      <br>
+      <p><b>Objectif :</b> naviguer et échanger en toute sécurité, sans exposer vos informations sensibles.</p>">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1"
+         viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="10" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+            <span><b>Sécurité numérique</b> – Protéger vos données, gérer vos mots de passe, éviter les arnaques en ligne.</span>
+          </li>
+          <li class="flex items-start gap-2 p-3 rounded-lg hover:shadow-md hover:bg-white/30 cursor-pointer service-item hover:-translate-y-1"
+          data-title="Entretien régulier"
+          data-content="<p>Un entretien simple et régulier permet de prolonger la durée de vie de votre matériel :</p>
+      <ul class='list-disc list-inside'>
+        <li><b>Nettoyage matériel</b> : dépoussiérage interne, vérification des ventilateurs et câblages.</li>
+        <li><b>Nettoyage logiciel</b> : suppression de fichiers inutiles, gestion des programmes au démarrage.</li>
+        <li>Application des <b>mises à jour système</b> et correctifs de sécurité.</li>
+      </ul>
+      <br>
+      <p>Un bon entretien prévient les ralentissements et évite de nombreuses pannes coûteuses.</p>">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+      <path d="M3 4l12 12"/>
+      <path d="M13.5 13.5l2 2"/>
+      <rect x="15.5" y="15.5" width="6.5" height="4" rx="0.5"/>
+      <path d="M16.5 15.5v4M18.25 15.5v4M20 15.5v4"/>
+    </svg>
+            <span><b>Entretien régulier</b> – Nettoyage matériel et logiciel pour éviter les ralentissements et pannes.</span>
+          </li>
+          <li class="flex items-start gap-2 p-3 rounded-lg hover:shadow-md hover:bg-white/30 cursor-pointer service-item hover:-translate-y-1"
+          data-title="Optimisation"
+          data-content="<p>Boostez la rapidité et la fluidité de vos appareils grâce à différents réglages :</p>
+      <ul class='list-disc list-inside'>
+        <li>Configuration des <b>paramètres système</b> pour de meilleures performances.</li>
+        <li>Désactivation des programmes inutiles qui tournent en arrière-plan.</li>
+        <li>Amélioration de la gestion de l’espace disque et de la mémoire vive.</li>
+        <li>Conseils pour optimiser la <b>durée de vie de la batterie</b> sur vos portables.</li>
+      </ul>
+      <br>
+      <p>Résultat : un ordinateur plus rapide, plus stable et plus agréable à utiliser.</p>">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+      <path d="M12 2l2 3h-4l2-3z"/>
+      <rect x="9" y="5" width="6" height="8" rx="3"/>
+      <circle cx="12" cy="9" r="1.3"/>
+      <path d="M9 11l-3 3h3M15 11l3 3h-3"/>
+      <path d="M12 13v4"/>
+      <path d="M11 21c.5-1.2 1-1.5 1-2.5 0 1 .5 1.3 1 2.5"/>
+    </svg>
+            <span><b>Optimisation</b> – Paramétrages et réglages pour améliorer la rapidité et la fluidité.</span>
+          </li>
+          <li class="flex items-start gap-2 p-3 rounded-lg hover:shadow-md hover:bg-white/30 cursor-pointer service-item hover:-translate-y-1"
+          data-title="Sauvegarde"
+          data-content="<p>Ne perdez plus jamais vos données grâce à une stratégie de sauvegarde adaptée :</p>
+      <ul class='list-disc list-inside'>
+        <li><b>Sauvegardes automatiques</b> dans le cloud (Google Drive, OneDrive, iCloud…).</li>
+        <li>Utilisation de <b>disques externes</b> pour stocker vos fichiers en local.</li>
+        <li>Mise en place de copies régulières pour éviter toute perte définitive.</li>
+        <li>Conseils pour la restauration rapide en cas de panne ou suppression accidentelle.</li>
+      </ul>
+      <br>
+      <p>Une bonne sauvegarde, c’est la garantie de retrouver vos données, quoi qu’il arrive.</p>">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+      <path d="M6 2h12l4 4v16H2V2h4z"/>
+      <rect x="9" y="14" width="6" height="6" rx="1"/>
+      <path d="M6 2v8h12V2"/>
+    </svg>
+            <span><b>Sauvegarde</b> – Conseils pour stocker vos données en sécurité (cloud, disques externes).</span>
+          </li>
+        </ul>
+
+        <!-- CTA RDV -->
+        <button id="openModal"
+          class="bg-blue-900 hover:bg-orange-500 duration-300 text-white mx-auto mt-10 p-4 rounded-lg cursor-pointer block w-50 hover:-translate-y-1">
+          <span class="font-semibold">Prendre un RDV</span>
+        </button>
+      </div>
+
+      <!-- Partie droite : FAQ -->
+      <aside class="w-full lg:w-[350px] bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6 text-gray-700 relative z-10">
+        <h2 class="text-xl font-bold text-blue-900 mb-4">FAQ</h2>
+        <div class="space-y-4">
+          <!-- FAQ déjà présente -->
+          <details class="border-b pb-2"><summary class="cursor-pointer font-semibold">Puis-je trouver des tutos pour sécuriser mes données personnelles ?</summary><p class="mt-2 text-sm">Oui...</p></details>
+          <details class="border-b pb-2"><summary class="cursor-pointer font-semibold">Proposez-vous des guides pour entretenir son matériel informatique ?</summary><p class="mt-2 text-sm">Bien sûr...</p></details>
+          <details class="border-b pb-2"><summary class="cursor-pointer font-semibold">Vos conseils sont-ils accessibles aux débutants ?</summary><p class="mt-2 text-sm">Absolument !</p></details>
+          <details class="border-b pb-2"><summary class="cursor-pointer font-semibold">Donnez-vous des astuces pour économiser la batterie de mon ordinateur ?</summary><p class="mt-2 text-sm">Oui...</p></details>
+          <details class="border-b pb-2"><summary class="cursor-pointer font-semibold">À quelle fréquence publiez-vous des conseils ?</summary><p class="mt-2 text-sm">Plusieurs fois par mois...</p></details>
+        </div>
+        <!-- Bouton Devis Gratuit -->
+        <div class="mt-6 text-center">
+          <a href="tarifs.html" class="inline-block bg-orange-500 hover:bg-blue-900 duration-300 text-white px-6 py-3 rounded-lg shadow-md hover:-translate-y-1">Demandez un devis gratuit</a>
+        </div>
+      </aside>
+
+      <!-- Liste des conseils (mobile version menu) -->
+      <aside class="block lg:hidden w-full bg-white/80 backdrop-blur-md rounded-xl shadow-md p-4 text-gray-700 mt-6 text-center">
+  <h2 class="text-lg font-bold text-blue-900 mb-4">📑 Liste des conseils</h2>
+  <ul class="space-y-2">
+    <li><a href="#conseil-securite" class="flex items-center gap-2 hover:text-orange-600">🔒 Sécurité numérique</a></li>
+    <li><a href="#conseil-entretien" class="flex items-center gap-2 hover:text-orange-600">🧹 Entretien régulier</a></li>
+    <li><a href="#conseil-optimisation" class="flex items-center gap-2 hover:text-orange-600">🚀 Optimisation</a></li>
+    <li><a href="#conseil-sauvegarde" class="flex items-center gap-2 hover:text-orange-600">💾 Sauvegarde</a></li>
+  </ul>
+</aside>
+    </section>
+
+
+    <!-- ✅ NOUVELLE SECTION : MENU GAUCHE + CONTENU DÉTAILLÉ -->
+    <section class="flex flex-col lg:flex-row gap-8 mt-24 px-6 max-w-[1200px] mx-auto">
+
+      
+
+      <!-- CONTENU PRINCIPAL -->
+      <div class="flex-1 space-y-16">
+
+        <!-- CONSEIL 1 -->
+        <div id="conseil-securite" class="bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6">
+          <h3 class="text-2xl font-bold text-blue-900 mb-3">🔒 Sécurité numérique</h3>
+          <p class="text-gray-700 leading-relaxed">
+      La sécurité de vos données passe par quelques réflexes simples :
+    </p>
+    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-3 space-y-2">
+      <li>Utilisez des <b>mots de passe complexes</b> et stockez-les dans un gestionnaire sécurisé (Bitwarden, KeePass).</li>
+      <li>Activez l’<b>authentification à deux facteurs (2FA)</b> pour vos comptes sensibles (banque, messagerie, réseaux sociaux).</li>
+      <li>Méfiez-vous des <b>emails suspects</b> : ne cliquez jamais sur des liens ou pièces jointes douteux.</li>
+      <li>Vérifiez régulièrement vos comptes avec <a href="https://haveibeenpwned.com/" target="_blank" class="text-blue-600 underline">Have I Been Pwned</a> pour savoir si vos identifiants ont fuité.</li>
+    </ul>
+          <button onclick="scrollToTop()" class="mt-4 bg-blue-900 hover:bg-orange-500 text-white px-4 py-2 rounded-lg">↑ Retour en haut</button>
+        </div>
+
+        <!-- CONSEIL 2 -->
+        <div id="conseil-entretien" class="bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6">
+          <h3 class="text-2xl font-bold text-blue-900 mb-3">🧹 Entretien régulier</h3>
+          <p class="text-gray-700 leading-relaxed">
+      Un entretien simple et régulier prolonge la durée de vie de vos équipements :
+    </p>
+    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-3 space-y-2">
+      <li><b>Dépoussiérez</b> régulièrement votre PC avec une bombe à air sec (ventilateurs, grilles d’aération).</li>
+      <li>Supprimez les <b>fichiers temporaires</b> et programmes inutiles pour libérer de l’espace disque.</li>
+      <li>Mettez à jour vos logiciels et votre système pour corriger les failles de sécurité.</li>
+      <li>Vérifiez l’état de vos câbles, chargeurs et périphériques pour éviter les pannes soudaines.</li>
+    </ul>
+          <button onclick="scrollToTop()" class="mt-4 bg-blue-900 hover:bg-orange-500 text-white px-4 py-2 rounded-lg">↑ Retour en haut</button>
+        </div>
+
+        <!-- CONSEIL 3 -->
+        <div id="conseil-optimisation" class="bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6">
+          <h3 class="text-2xl font-bold text-blue-900 mb-3">🚀 Optimisation</h3>
+          <p class="text-gray-700 leading-relaxed">
+      Quelques astuces pour rendre votre ordinateur plus rapide et fluide :
+    </p>
+    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-3 space-y-2">
+      <li>Désactivez les <b>programmes inutiles au démarrage</b> via le Gestionnaire des tâches.</li>
+      <li>Défragmentez vos disques durs (HDD) ou utilisez l’outil d’optimisation pour vos SSD.</li>
+      <li>Nettoyez régulièrement votre navigateur (historique, cookies, extensions inutiles).</li>
+      <li>Augmentez la <b>RAM</b> ou installez un SSD si votre PC est trop lent.</li>
+    </ul>
+          <button onclick="scrollToTop()" class="mt-4 bg-blue-900 hover:bg-orange-500 text-white px-4 py-2 rounded-lg">↑ Retour en haut</button>
+        </div>
+
+        <!-- CONSEIL 4 -->
+        <div id="conseil-sauvegarde" class="bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6">
+          <h3 class="text-2xl font-bold text-blue-900 mb-3">💾 Sauvegarde</h3>
+          <p class="text-gray-700 leading-relaxed">
+      Ne perdez jamais vos fichiers importants en mettant en place une bonne stratégie de sauvegarde :
+    </p>
+    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-3 space-y-2">
+      <li>Activez l’<b>historique des fichiers</b> sous Windows ou Time Machine sur Mac.</li>
+      <li>Faites des <b>sauvegardes automatiques</b> sur un disque dur externe ou un NA (serveur de stockage en réseau).</li>
+      <li>Stockez vos documents essentiels dans un <b>cloud sécurisé</b> (Google Drive, OneDrive, iCloud).</li>
+      <li>Appliquez la règle du <b>3-2-1</b> : 3 copies, 2 supports différents, 1 sauvegarde hors site.</li>
+    </ul>
+          <button onclick="scrollToTop()" class="mt-4 bg-blue-900 hover:bg-orange-500 text-white px-4 py-2 rounded-lg">↑ Retour en haut</button>
+        </div>
+
+        <!-- ASTUCE DU MOIS -->
+<div id="conseil-astuce-mois" class="bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6 border-l-6 border-orange-500">
+  <h3 class="text-2xl font-bold text-blue-900 mb-3">💡 Astuce du mois</h3>
+  <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-3 space-y-2">
+      <li><b>Protégez votre Wi-Fi domestique :</b> changez régulièrement le mot de passe de votre box et évitez d’utiliser celui par défaut.</li>
+      <li>Activez le chiffrement <b>WPA2 ou WPA3</b> dans les paramètres de votre routeur pour bloquer les intrusions.</li>
+      <li>Enfin, désactivez le WPS si vous ne l’utilisez pas : c’est une faille fréquente exploitée par les pirates.</li>
+    </ul>
+  <button onclick="scrollToTop()" class="mt-4 bg-blue-900 hover:bg-orange-500 text-white px-4 py-2 rounded-lg">
+    ↑ Retour en haut
+  </button>
+</div>
+
+
+      </div>
+    </section>
+
+
+    <!-- Fonctionnalités en bas -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-5 m-auto mt-24">
+
+      <!-- Fonctionnalité 1 -->
+      <a href="services.html" 
+         class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Services</h3>
+          <p class="w-50 text-sm">Un accompagnement complet pour particuliers : installation, dépannage, diagnostic et assistance informatique</p>
+        </div>
+      </a>
+
+      <!-- Fonctionnalité 2 -->
+      <a href="formations.html" 
+         class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="6" height="6" rx="1"/>
+          <rect x="14" y="4" width="6" height="6" rx="1"/>
+          <rect x="4" y="14" width="6" height="6" rx="1"/>
+          <rect x="14" y="14" width="6" height="6" rx="1"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Formations</h3>
+          <p class="w-50 text-sm">Bibliothèque d'applications, connexion à des logiciels tiers, intégrations aux calendriers et appels</p>
+        </div>
+      </a>
+
+      <!-- Fonctionnalité 3 -->
+      <a href="conseilsPratiques.html" 
+         class="flex items-start gap-3 text-orange-600 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11l9-7 9 7"/>
+          <path d="M5 10v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9"/>
+          <path d="M12 12v6"/>
+          <path d="M12 12l-3 2"/>
+          <path d="M12 12l3 2"/>
+          <circle cx="12" cy="10" r="1"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Conseils pratiques</h3>
+          <p class="w-50 text-sm">Connectez-vous à Google Home, Apple Home ou Alexa via les protocoles</p>
+        </div>
+      </a>
+
+      <!-- Fonctionnalité 4 -->
+      <a href="quiSommesNous.html" 
+         class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15.5 6.5a3.5 3.5 0 1 0-4.95 4.95l-6.05 6.05a2 2 0 0 0 2.83 2.83l6.05-6.05a3.5 3.5 0 0 0 2.12-7.78z"/>
+          <path d="M21 3l-2 2-3 1 2 2 1-3 2-2z"/>
+          <path d="M13 11l4 4"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Qui sommes-nous ?</h3>
+          <p class="w-50 text-sm">Création de site internet, identité graphique, support réseau et périphériques</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <section class="flex justify-center m-auto mb-5">
+      <p class="text-sm">Mentions légales – PC Express SA © 2026</p>
+    </section>
+  </main>
+
+  <!-- Modals explicatifs -->
+  <div id="serviceModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-lg w-11/12 sm:w-[500px] p-6 relative">
+      <button id="closeServiceModal" class="absolute top-2 right-2 text-gray-500 hover:text-black">✕</button>
+      <h2 id="serviceTitle" class="text-xl font-bold text-blue-900 mb-4"></h2>
+      <p id="serviceContent" class="text-gray-700 leading-relaxed"></p>
+    </div>
+  </div>
+
+  <!-- Modal RDV -->
+  <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    <div id="modalContent" class="bg-white rounded-xl shadow-lg w-11/12 sm:w-96 p-6 relative transform scale-95 transition-transform duration-300">
+      <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black">✕</button>
+      <h2 class="text-xl font-bold mb-4 text-blue-900">Prendre un rendez-vous</h2>
+      <form id="contactForm" class="flex flex-col gap-4">
+        <input type="text" id="name" placeholder="Nom" class="border rounded-lg p-2 w-full">
+        <input type="email" id="email" placeholder="Email" class="border rounded-lg p-2 w-full">
+        <input type="tel" id="phone" placeholder="Téléphone" class="border rounded-lg p-2 w-full">
+        <input type="date" id="date" class="border rounded-lg p-2 w-full">
+        <div>
+          <label for="message" class="font-medium text-gray-700">Message</label>
+                    <p class="text-sm text-gray-500 mb-1">
+            Décrivez votre problème le plus clairement possible afin que nous puissions vous aider rapidement.
+          </p>
+          <textarea id="message" placeholder="Votre message..." class="border rounded-lg p-2 w-full"></textarea>
+        </div>
+        <button type="submit" class="bg-blue-900 text-white rounded-lg p-2 hover:bg-black">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("T2PevuEgYoNEgD05x");</script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+  <script src="src/js/script.js"></script>
+  
+</body>
+</html>
+
+
+
+

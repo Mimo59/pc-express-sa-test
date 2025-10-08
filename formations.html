@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formations – PC Express</title>
+  <link href="src/css/output.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<!-- Toast -->
+<div id="toast"
+     class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-blue-900 text-white px-6 py-3 rounded-lg shadow-lg z-60 hidden opacity-0 transition-opacity duration-300">
+  ✅ Votre demande a bien été envoyée !
+</div>
+
+<body class="relative">
+  <!-- Background pleine largeur FIXE -->
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <img
+      src="src/assets/images/espace_formation.png"
+      alt="Fond"
+      class="w-full h-full object-cover blur-xs opacity-90"
+    />
+    <!-- voile de lisibilité -->
+    <div class="absolute inset-0 bg-white/60"></div>
+  </div>
+
+  <main class="container mx-auto min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-blue-900 backdrop-blur-md shadow-md z-50">
+      <div class="flex items-center justify-between p-4">
+        <span class="font-bold text-white">PC Express SA</span>
+
+        <!-- Bouton burger (mobile) -->
+        <button id="burgerBtn" class="lg:hidden flex flex-col gap-1 relative z-50">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+
+        <!-- Menu normal (desktop) -->
+        <nav class="hidden lg:block">
+          <ul class="flex gap-6 text-blue-900">
+            <li><a href="index.html" class="hover:text-orange-600 text-white">Accueil</a></li>
+            <li><a href="services.html" class="hover:text-orange-600 text-white">Services</a></li>
+            <li><a href="formations.html" class="text-orange-600">Formations</a></li>
+            <li><a href="conseilsPratiques.html" class="hover:text-orange-600 text-white">Conseils pratiques</a></li>
+            <li><a href="quiSommesNous.html" class="hover:text-orange-600 text-white">Qui sommes-nous</a></li>
+            <li><a href="tarifs.html" class="hover:text-orange-600 text-white">Tarifs</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Overlay sombre menu mobile -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+    <!-- Menu mobile slide-in -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-64 h-full bg-white/70 backdrop-blur-md shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+      <ul class="flex flex-col gap-6 p-6 text-blue-900">
+        <li><a href="index.html" class="hover:text-orange-600">Accueil</a></li>
+        <li><a href="services.html" class="hover:text-orange-600">Services</a></li>
+        <li><a href="formations.html" class="text-orange-600">Formations</a></li>
+        <li><a href="conseilsPratiques.html" class="hover:text-orange-600">Conseils pratiques</a></li>
+        <li><a href="quiSommesNous.html" class="hover:text-orange-600">Qui sommes-nous</a></li>
+        <li><a href="tarifs.html" class="hover:text-orange-600">Tarifs</a></li>
+      </ul>
+    </div>
+
+    <!-- Contenu Formations + FAQ -->
+    <section class="flex flex-col lg:flex-row justify-center items-start mx-auto mt-[20vh] max-w-[1100px] grow gap-12 px-4 sm:px-6">
+
+      <!-- Partie gauche : Formations -->
+      <div class="flex-1 max-w-[650px] relative z-10">
+        <h1 class="text-3xl font-extrabold text-blue-900 mb-6">Formations</h1>
+        <p class="text-lg text-gray-600 font-semibold">
+          Des formations personnalisées pour particuliers et débutants, afin d’être à l’aise avec vos outils numériques.
+        </p>
+
+        <p class="text-md text-gray-700 mt-4 italic">
+          Nos formations sont accessibles à tous les niveaux, 
+          <span class="font-bold text-blue-900">à domicile</span> ou 
+          <span class="font-bold text-blue-900">à distance</span>.
+        </p>
+
+        <!-- Liste avec icônes CLIQUABLES (mêmes classes/attributs que services) -->
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 text-gray-500">
+
+          <li class="flex items-start gap-2 p-4 rounded-lg cursor-pointer service-item transition hover:shadow-md hover:bg-white/40 hover:-translate-y-1"
+              data-title="Maîtrisez les logiciels essentiels :"
+              data-content="<b>Word</b> pour la rédaction de documents professionnels, 
+      <b>Excel</b> pour créer et automatiser vos tableaux de calculs, et <b>PowerPoint</b> pour des présentations impactantes.  
+      Nous abordons également des fonctions avancées (formules Excel, mise en forme conditionnelle, insertion d’objets multimédias).  
+      L’objectif : vous rendre totalement autonome et efficace dans vos usages bureautiques.">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1"
+         viewBox="0 0 24 24">
+      <path d="M7 2h8l5 5v15a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
+      <path d="M12 2v6h6"/>
+    </svg>
+      <span><b>Suite Office</b> – Word, Excel, PowerPoint : rédaction de documents, création de tableaux, présentations.</span>
+          </li>
+ 
+          <li class="flex items-start gap-2 p-4 rounded-lg cursor-pointer service-item transition hover:shadow-md hover:bg-white/40 hover:-translate-y-1"
+              data-title="Navigation internet"
+              data-content="
+      Apprenez à utiliser Internet en toute sécurité et à effectuer vos <b>démarches administratives en ligne</b> : 
+      impôts, sécurité sociale, CAF, ou encore demandes de documents officiels.  
+      Nous vous guidons également dans la recherche d’informations fiables, la configuration de vos navigateurs et la protection de vos données lors de vos navigations quotidiennes.">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1"
+         viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20z"/>
+    </svg>
+      <span><b>Navigation internet</b> – Maîtriser les démarches administratives en ligne (impôts, sécurité sociale, CAF, etc.).</span>
+          </li>
+
+          <li class="flex items-start gap-2 p-4 rounded-lg cursor-pointer service-item transition hover:shadow-md hover:bg-white/40 hover:-translate-y-1"
+              data-title="Messagerie & bureautique"
+              data-content="Gérez efficacement vos <b>emails</b> : création et organisation de dossiers, gestion des contacts, mise en place de signatures professionnelles.  
+      Nous vous accompagnons aussi dans la gestion de vos <b>fichiers et documents</b> : classement, partage, sauvegarde et collaboration en ligne (Google Drive, OneDrive).  
+      Le but : gagner du temps et garder un environnement numérique organisé.">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1"
+         viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" ry="2"/>
+      <path d="M3 7l9 6l9-6"/>
+    </svg>
+      <span><b>Messagerie & bureautique</b> – Gérer vos e-mails, organiser vos fichiers, partager vos documents, modifier des pdf.</span>
+          </li>
+
+          <li class="flex items-start gap-2 p-4 rounded-lg cursor-pointer service-item transition hover:shadow-md hover:bg-white/40 hover:-translate-y-1"
+              data-title="Sensibilisation sécurité"
+              data-content="Protégez vos données personnelles et vos appareils contre les menaces numériques.  
+      Vous apprendrez à créer et gérer des <b>mots de passe robustes</b>, à détecter les <b>tentatives de phishing</b> et à utiliser les bons outils (antivirus, double authentification, gestionnaire de mots de passe).  
+      Nous vous montrons aussi comment sécuriser vos achats en ligne et éviter les arnaques fréquentes.">
+            <svg class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1"
+         viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="10" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+      <span><b>Sensibilisation sécurité</b> – Apprendre à reconnaître les arnaques, sécuriser vos mots de passe et protéger vos données.</span>
+          </li>
+        </ul>
+
+        <!-- CTA RDV -->
+        <button id="openModal"
+          class="bg-blue-900 hover:bg-orange-500 duration-300 text-white mx-auto mt-10 p-4 rounded-lg cursor-pointer block w-50 hover:-translate-y-1">
+          <span class="font-semibold">Prendre un RDV</span>
+        </button>
+      </div>
+
+      <!-- Partie droite : FAQ -->
+      <aside class="w-full lg:w-[350px] bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6 text-gray-700 relative z-10">
+        <h2 class="text-xl font-bold text-blue-900 mb-4">FAQ</h2>
+        <div class="space-y-4">
+          <details class="border-b pb-2">
+            <summary class="cursor-pointer font-semibold">Quels types de formations proposez-vous ?</summary>
+            <p class="mt-2 text-sm">Suite Office, navigation Internet, gestion d’e-mails, modules spécifiques selon vos besoins.</p>
+          </details>
+          <details class="border-b pb-2">
+            <summary class="cursor-pointer font-semibold">Les formations sont-elles accessibles aux débutants ?</summary>
+            <p class="mt-2 text-sm">Oui, nos cours sont adaptés à tous les niveaux.</p>
+          </details>
+          <details class="border-b pb-2">
+            <summary class="cursor-pointer font-semibold">Peut-on suivre une formation à distance ?</summary>
+            <p class="mt-2 text-sm">Absolument : à domicile ou en visioconférence (partage d’écran).</p>
+          </details>
+          <details class="border-b pb-2">
+            <summary class="cursor-pointer font-semibold">Combien de temps dure une formation ?</summary>
+            <p class="mt-2 text-sm">De 1–2h ponctuelles à plusieurs séances selon l’objectif.</p>
+          </details>
+          <details class="border-b pb-2">
+            <summary class="cursor-pointer font-semibold">Fournissez-vous des supports pédagogiques ?</summary>
+            <p class="mt-2 text-sm">Oui, fiches pratiques et exercices pas à pas inclus.</p>
+          </details>
+        </div>
+
+        <!-- Bouton Devis Gratuit -->
+        <div class="mt-6 text-center">
+  <a href="tarifs.html" 
+     class="inline-block bg-orange-500 hover:bg-blue-900 duration-300 text-white px-6 py-3 rounded-lg shadow-md hover:-translate-y-1">
+    Demandez un devis gratuit
+  </a>
+</div>
+      </aside>
+    </section>
+
+    <!-- Fonctionnalités en bas -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-5 m-auto mt-24">
+
+      <!-- Fonctionnalité 1 -->
+      <a href="services.html" 
+         class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Services</h3>
+          <p class="w-50 text-sm">Un accompagnement complet pour particuliers : installation, dépannage, diagnostic et assistance informatique</p>
+        </div>
+      </a>
+
+      <!-- Fonctionnalité 2 -->
+      <a href="formations.html" 
+         class="flex items-start gap-3 text-orange-600 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="6" height="6" rx="1"/>
+          <rect x="14" y="4" width="6" height="6" rx="1"/>
+          <rect x="4" y="14" width="6" height="6" rx="1"/>
+          <rect x="14" y="14" width="6" height="6" rx="1"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Formations</h3>
+          <p class="w-50 text-sm">Bibliothèque d'applications, connexion à des logiciels tiers, intégrations aux calendriers et appels</p>
+        </div>
+      </a>
+
+      <!-- Fonctionnalité 3 -->
+      <a href="conseilsPratiques.html" 
+         class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11l9-7 9 7"/>
+          <path d="M5 10v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9"/>
+          <path d="M12 12v6"/>
+          <path d="M12 12l-3 2"/>
+          <path d="M12 12l3 2"/>
+          <circle cx="12" cy="10" r="1"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Conseils pratiques</h3>
+          <p class="w-50 text-sm">Connectez-vous à Google Home, Apple Home ou Alexa via les protocoles</p>
+        </div>
+      </a>
+
+      <!-- Fonctionnalité 4 -->
+      <a href="quiSommesNous.html" 
+         class="flex items-start gap-3 text-gray-500 hover:text-blue-900 transition">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15.5 6.5a3.5 3.5 0 1 0-4.95 4.95l-6.05 6.05a2 2 0 0 0 2.83 2.83l6.05-6.05a3.5 3.5 0 0 0 2.12-7.78z"/>
+          <path d="M21 3l-2 2-3 1 2 2 1-3 2-2z"/>
+          <path d="M13 11l4 4"/>
+        </svg>
+        <div>
+          <h3 class="font-bold">Qui sommes-nous ?</h3>
+          <p class="w-50 text-sm">Création de site internet, identité graphique, support réseau et périphériques</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <section class="flex justify-center m-auto mb-5">
+      <p class="text-sm">Mentions légales – PC Express SA © 2026</p>
+    </section>
+  </main>
+
+  <!-- Modal Explications -->
+  <div id="serviceModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-lg w-11/12 sm:w-[500px] p-6 relative">
+      <button id="closeServiceModal" class="absolute top-2 right-2 text-gray-500 hover:text-black">✕</button>
+      <h2 id="serviceTitle" class="text-xl font-bold text-blue-900 mb-4"></h2>
+      <p id="serviceContent" class="text-gray-700 leading-relaxed"></p>
+    </div>
+  </div>
+
+  <!-- Modal RDV (z-50 pour passer DEVANT tout) -->
+  <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    <div id="modalContent" class="bg-white rounded-xl shadow-lg w-11/12 sm:w-96 p-6 relative transform scale-95 transition-transform duration-300">
+      <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black">✕</button>
+      <h2 class="text-xl font-bold mb-4 text-blue-900">Prendre un rendez-vous</h2>
+      <form id="contactForm" class="flex flex-col gap-4">
+        <input type="text" id="name" placeholder="Nom" class="border rounded-lg p-2 w-full">
+        <input type="email" id="email" placeholder="Email" class="border rounded-lg p-2 w-full">
+        <input type="tel" id="phone" placeholder="Téléphone" class="border rounded-lg p-2 w-full">
+        <input type="date" id="date" class="border rounded-lg p-2 w-full">
+        <div>
+          <label for="message" class="font-medium text-gray-700">Message</label>
+          <p class="text-sm text-gray-500 mb-1">Décrivez votre problème le plus clairement possible afin que nous puissions vous aider rapidement.</p>
+          <textarea id="message" placeholder="Votre message..." class="border rounded-lg p-2 w-full"></textarea>
+        </div>
+        <button type="submit" class="bg-blue-900 text-white rounded-lg p-2 hover:bg-black">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts (identiques à services.html) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("T2PevuEgYoNEgD05x");</script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+  <script src="src/js/script.js"></script>
+</body>
+</html>
+
+
+
