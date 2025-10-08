@@ -103,11 +103,11 @@
 
         <h2 class="text-xl font-bold mb-4 text-blue-900">Prendre un rendez-vous</h2>
         <form id="contactForm" class="flex flex-col gap-4">
-          <input type="text" id="name" placeholder="Nom" class="border rounded-lg p-2 w-full">
-          <input type="email" id="email" placeholder="Email" class="border rounded-lg p-2 w-full">
-          <input type="tel" id="phone" placeholder="Téléphone" class="border rounded-lg p-2 w-full">
-          <input type="date" id="date" class="border rounded-lg p-2 w-full">
-          <textarea id="message" placeholder="Votre message..." class="border rounded-lg p-2 w-full"></textarea>
+          <input type="text" id="name" name="name" placeholder="Nom" class="border rounded-lg p-2 w-full" required>
+          <input type="email" id="email" name="email" placeholder="Email" class="border rounded-lg p-2 w-full" required>
+          <input type="tel" id="phone" name="phone" placeholder="Téléphone" class="border rounded-lg p-2 w-full" required>
+          <input type="date" id="date" name="date" class="border rounded-lg p-2 w-full" required>
+          <textarea id="message" name="message" placeholder="Votre message..." class="border rounded-lg p-2 w-full"></textarea>
           <button type="submit" class="bg-blue-900 text-white rounded-lg p-2 hover:bg-black">Envoyer</button>
         </form>
       </div>

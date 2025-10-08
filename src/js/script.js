@@ -1,4 +1,4 @@
-// =====================================================
+// ===================================================== 
 // PC Express – script.js (global pour toutes les pages)
 // =====================================================
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---------------------------------------------------
-  // TOAST (succès / erreur) — id="toast" présent sur toutes les pages
+  // TOAST (succès / erreur)
   // ---------------------------------------------------
   const toast = document.getElementById("toast");
   function showToast(msg, isError = false) {
@@ -86,66 +86,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---------------------------------------------------
-  // FORMULAIRE RDV (Google Apps Script) – id="contactForm"
+  // FORMULAIRE RDV (EmailJS) – id="contactForm"
   // ---------------------------------------------------
-  const form = document.getElementById("contactForm");
-  const nameField = document.getElementById("name");
-  const emailField = document.getElementById("email");
-  const phoneField = document.getElementById("phone");
-  const dateField = document.getElementById("date");
-  const messageField = document.getElementById("message");
-
-  if (form) {
-    form.addEventListener("submit", (e) => {
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      if (!nameField.value.trim())
-        return showToast("⚠️ Merci d’indiquer votre nom", true);
-      if (!emailField.value.trim())
-        return showToast("⚠️ Merci d’indiquer votre email", true);
-      if (!phoneField.value.trim())
-        return showToast("⚠️ Merci d’indiquer votre téléphone", true);
-      if (!dateField.value.trim())
-        return showToast("⚠️ Merci de choisir une date", true);
-      if (!messageField.value.trim())
-        return showToast("⚠️ Merci de décrire votre problème", true);
+      const params = {
+        from_name: contactForm.name?.value || "",
+        from_email: contactForm.email?.value || "",
+        phone: contactForm.phone?.value || "",
+        date: contactForm.date?.value || "",
+        message: contactForm.message?.value || ""
+      };
 
-      const formData = new FormData();
-      formData.append("name", nameField.value);
-      formData.append("email", emailField.value);
-      formData.append("phone", phoneField.value);
-      formData.append("date", dateField.value);
-      formData.append("message", messageField.value);
+      emailjs.send("service_14beauu", "template_89sq0xi", params)
+        .then(() => {
+          showToast("✅ Votre demande de RDV a bien été envoyée !");
+          contactForm.reset();
+          closeModal();
 
-      fetch(
-        "https://script.google.com/macros/s/AKfycbynfPsM6nElRiOlqJdM1o61bdU--mEpzdEsel-zaPmiIhrdf37AD2Usjg_c56TZmWD8BQ/exec",
-        { method: "POST", body: formData }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            showToast("✅ Votre demande a bien été envoyée !");
-            form.reset();
-            closeModal();
-            if (data.reservedDates) initFlatpickr(data.reservedDates);
-          } else {
-            showToast("❌ Erreur lors de l’envoi: " + data.error, true);
-          }
+          emailjs.send("service_14beauu", "template_accuse_rdv", params)
+      .catch(err => console.error("Erreur accusé RDV:", err));
         })
-        .catch((err) => console.error("Erreur Google Apps Script:", err));
+        .catch((err) => {
+          console.error("Erreur EmailJS RDV:", err);
+          showToast("❌ Erreur lors de l’envoi du RDV", true);
+        });
     });
   }
 
   // ---------------------------------------------------
-  // FLATPICKR (champ date du RDV) + placeholder jj/mm/aa + légende
+  // FLATPICKR (champ date du RDV) + placeholder
   // ---------------------------------------------------
   function initFlatpickr(reservedDates = []) {
     if (!window.flatpickr || !document.querySelector("#date")) return;
 
     const fp = flatpickr("#date", {
-      dateFormat: "Y-m-d", // interne
-      altInput: true, // input visible
-      altFormat: "d/m/Y", // JJ/MM/AA
+      dateFormat: "Y-m-d",
+      altInput: true,
+      altFormat: "d/m/Y",
       minDate: "today",
       disable: reservedDates,
       locale: "fr",
@@ -153,10 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (fp && fp.altInput) {
-      fp.altInput.placeholder = "jj/mm/aa"; // conserver le placeholder
+      fp.altInput.placeholder = "jj/mm/aa";
     }
 
-    // Légende dispo/réservé
     let legend = document.getElementById("calendarLegend");
     if (!legend) {
       legend = document.createElement("p");
@@ -167,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Charger les dates réservées au démarrage (si le champ #date existe)
   if (document.getElementById("date")) {
     fetch(
       "https://script.google.com/macros/s/AKfycbynfPsM6nElRiOlqJdM1o61bdU--mEpzdEsel-zaPmiIhrdf37AD2Usjg_c56TZmWD8BQ/exec"
@@ -194,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .map((cb) => cb.value)
         .join(", ") || "Non précisé";
 
-      const formData = {
+      const params = {
         firstname: tarifsForm.firstname?.value || "",
         lastname: tarifsForm.lastname?.value || "",
         email: tarifsForm.email?.value || "",
@@ -203,16 +182,19 @@ document.addEventListener("DOMContentLoaded", () => {
         message: tarifsForm.message?.value || "",
       };
 
-      // ⚠️ Utilise tes IDs EmailJS (déjà init côté HTML)
-      emailjs
-        .send("service_14beauu", "template_t6gflsr", formData)
+      emailjs.send("service_14beauu", "template_t6gflsr", params)
         .then(() => {
           showToast("✅ Votre demande de devis a bien été envoyée !");
           tarifsForm.reset();
+
+          // Accusé de réception côté client
+    emailjs.send("service_14beauu", "template_accuse_rdv", params)
+      .catch(err => console.error("Erreur accusé RDV:", err));
+    
         })
         .catch((err) => {
-          console.error("Erreur EmailJS:", err);
-          showToast("❌ Erreur lors de l’envoi", true);
+          console.error("Erreur EmailJS Devis:", err);
+          showToast("❌ Erreur lors de l’envoi du devis", true);
         });
     });
   }
@@ -230,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     items.forEach((item) => {
       item.addEventListener("click", () => {
         serviceTitle.textContent = item.dataset.title || "";
-        // innerHTML pour garder <b>, <ul>… passés dans data-content
         serviceContent.innerHTML = item.dataset.content || "";
         serviceModal.classList.remove("hidden");
         serviceModal.classList.add("flex");
@@ -253,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---------------------------------------------------
-  // SMOOTH SCROLL vers les sections de conseils (ancres #conseil-…)
+  // SMOOTH SCROLL vers les sections de conseils
   // ---------------------------------------------------
   document.querySelectorAll("a[href^='#conseil-']").forEach((a) => {
     a.addEventListener("click", (e) => {
@@ -267,17 +248,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------------------------------------------------
-  // BOUTON "Retour en haut" (expose la fonction globalement)
+  // BOUTON "Retour en haut"
   // ---------------------------------------------------
   window.scrollToTop = function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // ---------------------------------------------------
-  // STICKY ASIDE (conseils) – évite de recouvrir le footer
+  // STICKY ASIDE (conseils)
   // ---------------------------------------------------
-  // Si l'aside sticky est dans le même wrapper que les sections, ça suffit.
-  // Sinon, on corrige quand le footer entre dans le viewport.
   const stickyAside = document.querySelector("aside.sticky");
   const footer = document.querySelector("section.flex.justify-center");
   if (stickyAside && footer) {
@@ -296,4 +275,5 @@ document.addEventListener("DOMContentLoaded", () => {
     obs.observe(footer);
   }
 });
+
 
